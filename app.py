@@ -237,8 +237,44 @@ def render_footer() -> None:
 
 def page_overview() -> None:
     """Render the Overview page with country summary cards."""
-    st.markdown("# Overview")
+    st.markdown("# LATAM Economic Dashboard")
     st.markdown('<div class="accent-bar"></div>', unsafe_allow_html=True)
+
+    with st.expander("ℹ️ About this project — What it does and how it works", expanded=False):
+        st.markdown("""
+**What is this?**
+An end-to-end data pipeline that extracts real economic data from the **World Bank API**, transforms it, stores it in SQLite, and applies ML models to forecast key indicators for 6 LATAM countries: Chile, Argentina, Brazil, Mexico, Colombia, and Peru.
+
+**Data source:**
+> All data comes from the [World Bank Open Data API](https://data.worldbank.org/) — real, official economic statistics. No API key required.
+
+**7 indicators tracked:**
+- GDP per capita (USD)
+- GDP growth (% annual)
+- Inflation (CPI, % annual)
+- Trade as % of GDP
+- Merchandise exports (USD)
+- Unemployment rate (%)
+- Internet users (% of population)
+
+**ETL Pipeline:**
+1. **Extract** — Pulls 25 years of data (2000-2024) from the World Bank API v2 for each country/indicator combination
+2. **Transform** — Cleans nulls, pivots from long to wide format, calculates year-over-year growth rates, normalizes indicators (0-1) for cross-country comparison, and creates lag features for ML
+3. **Load** — Stores in SQLite with 3 tables: `raw_indicators`, `transformed`, `forecasts`
+
+**ML Models — 3 approaches:**
+- **Linear Regression** (baseline): Simple trend extrapolation. *Use case: establishing a baseline forecast to compare against more complex models.*
+- **Exponential Smoothing (Holt)**: Captures level + trend in time series data. *Use case: forecasting indicators with clear upward/downward trends (like GDP per capita).*
+- **Random Forest**: Uses all indicators + lag features to predict GDP growth. *Use case: understanding which economic factors best predict economic growth — feature importance reveals the drivers.*
+
+**How to read the forecasts:**
+- The solid line is historical data (real)
+- The dashed line is the 5-year forecast
+- The shaded band is the 95% confidence interval — wider band = more uncertainty
+
+**Feature Importance** answers: *"Which economic indicators best predict GDP growth?"* — this is where the Random Forest model shows which variables matter most.
+        """)
+
 
     if not data_is_available():
         st.info("No data available. Go to **ETL Pipeline** to fetch data first.")
