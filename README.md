@@ -1,9 +1,12 @@
 # LATAM Economic Dashboard
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://latam-economic-dashboard-5ianvbjdquf2urrutmbhoy.streamlit.app/)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white)](https://python.org)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.30%2B-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
+**[Live Demo](https://latam-economic-dashboard-5ianvbjdquf2urrutmbhoy.streamlit.app/)**
 
 An end-to-end **ETL + Machine Learning + Interactive Dashboard** project that extracts economic indicators from the [World Bank API](https://datahelpdesk.worldbank.org/knowledgebase/articles/889392), transforms and stores them in SQLite, generates forecasts with ML models, and presents everything through a polished Streamlit application.
 
